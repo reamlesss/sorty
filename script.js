@@ -1,20 +1,17 @@
 var arrayOfNumbers;
 let resultString;
 
-const resultText = document.getElementById('result');
+const resultText = document.getElementById("result");
 
 function getArray() {
-    const input = document.getElementById('userInput');
-    const inputString = input.value;
-    arrayOfNumbers = inputString.split(',').map(Number);
-    
-    
+  const input = document.getElementById("userInput");
+  const inputString = input.value;
+  arrayOfNumbers = inputString.split(",").map(Number);
+  return inputString.split(",").map(Number);
 }
 
-
-
 function quickSort(arr) {
-    getArray()
+  getArray();
   if (arr.length <= 1) {
     return arr;
   }
@@ -34,9 +31,8 @@ function quickSort(arr) {
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
-
 function mergeSort(arr) {
-    getArray();
+  arr = getArray();
   if (arr.length <= 1) {
     return arr;
   }
@@ -48,7 +44,7 @@ function mergeSort(arr) {
   return merge(mergeSort(left), mergeSort(right));
 }
 
-function merge(left, right) {   
+function merge(left, right) {
   let result = [];
   let leftIndex = 0;
   let rightIndex = 0;
@@ -63,25 +59,23 @@ function merge(left, right) {
     }
   }
 
-    resultString = result.concat(left.slice(leftIndex), right.slice(rightIndex));
-    
+  resultString = result.concat(left.slice(leftIndex), right.slice(rightIndex));
 }
 
-
 function showNumbersContainer() {
-  const numberContainer = document.getElementById('number-container');
-  if (numberContainer.style.display == 'none') {
-    numberContainer.style.display = 'flex';
+  const numberContainer = document.getElementById("number-container");
+  if (numberContainer.style.display == "none") {
+    numberContainer.style.display = "flex";
   } else {
     numberContainer.style.display = "none";
   }
 }
 
 function showWordsContainer() {
-  const wordsContainer = document.getElementById('words-container');
-  if (wordsContainer.style.display == 'none') {
-    wordsContainer.style.display = 'flex';
+  const wordsContainer = document.getElementById("words-container");
+  if (wordsContainer.style.display == "none") {
+    wordsContainer.style.display = "flex";
   } else {
-    showWordsContainer.
+    wordsContainer.style.display = "none";
   }
 }
