@@ -7,11 +7,19 @@ function getArray() {
   const input = document.getElementById("userInput");
   const inputString = input.value;
   arrayOfNumbers = inputString.split(",").map(Number);
-  return inputString.split(",").map(Number);
+
+  return arrayOfNumbers;
+}
+
+function setResult(value) {
+  resultText.innerHTML = value;
 }
 
 function quickSort(arr) {
-  getArray();
+  if (arr === undefined) {
+    arr = getArray();
+  }
+
   if (arr.length <= 1) {
     return arr;
   }
@@ -31,9 +39,14 @@ function quickSort(arr) {
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
-function mergeSort(arr) {
-  arr = getArray();
-  if (arr.length <= 1) {
+function mergeSort() {
+  const arr = getArray();
+
+  // if (arr.length <= 1) {
+  //   return arr;
+  // }
+
+  if (arr.length == 1) {
     return arr;
   }
 
@@ -41,7 +54,7 @@ function mergeSort(arr) {
   const left = arr.slice(0, middle);
   const right = arr.slice(middle);
 
-  return merge(mergeSort(left), mergeSort(right));
+  arrayOfNumbers = merge(mergeSort(left), mergeSort(right));
 }
 
 function merge(left, right) {
