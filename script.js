@@ -6,29 +6,40 @@ const resultText = document.getElementById("result");
 function getArray() {
   const input = document.getElementById("userInput");
   const inputString = input.value;
-  arrayOfNumbers = inputString.split(",").map(Number);
+   var numberArray = inputString.split(",").map(Number);
 
-  return arrayOfNumbers;
+  return numberArray;
 }
 
-function setResult(value) {
-  resultText.innerHTML = value;
+
+function updateResult() {
+  resultText.innerHTML = resultString; 
 }
 
-function quickSort(arr) {
-  if (arr === undefined) {
-    arr = getArray();
-  }
 
+function quickSort() {
+  arrayOfNumbers = getArray();
+
+    const sortedArray = performQuickSort([...arrayOfNumbers]);
+
+    // Update resultString with the sorted array
+  resultString = "Quick Sort: " + sortedArray.join(", ");
+  
+  updateResult();
+  
+}
+
+
+function performQuickSort(arr) {
   if (arr.length <= 1) {
     return arr;
   }
 
-  const pivot = arr[0];
+  const pivot = arr[arr.length - 1];
   const left = [];
   const right = [];
 
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] < pivot) {
       left.push(arr[i]);
     } else {
@@ -36,17 +47,22 @@ function quickSort(arr) {
     }
   }
 
-  return quickSort(left).concat(pivot, quickSort(right));
+  return [...performQuickSort(left), pivot, ...performQuickSort(right)];
 }
 
 function mergeSort() {
-  const arr = getArray();
+  arrayOfNumbers = getArray();
 
-  // if (arr.length <= 1) {
-  //   return arr;
-  // }
+    const sortedArray = performMergeSort([...arrayOfNumbers]);
 
-  if (arr.length == 1) {
+    
+  resultString = "Merge Sort: " + sortedArray.join(", ");
+  updateResult();
+}
+
+
+function performMergeSort(arr) {
+  if (arr.length <= 1) {
     return arr;
   }
 
@@ -54,8 +70,9 @@ function mergeSort() {
   const left = arr.slice(0, middle);
   const right = arr.slice(middle);
 
-  arrayOfNumbers = merge(mergeSort(left), mergeSort(right));
+  return merge(performMergeSort(left), performMergeSort(right));
 }
+
 
 function merge(left, right) {
   let result = [];
@@ -72,8 +89,11 @@ function merge(left, right) {
     }
   }
 
-  resultString = result.concat(left.slice(leftIndex), right.slice(rightIndex));
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
+
+
+
 
 function showNumbersContainer() {
   const numberContainer = document.getElementById("number-container");
